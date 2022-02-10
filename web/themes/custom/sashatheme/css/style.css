@@ -1,4 +1,7 @@
-/**
- * If using a CSS pre-processor, tell it to overwrite this file. If not, place
- * your custom CSS modifications here.
- */
+.navbar-header{
+    margin: 0 10px;
+   width: 1000px;
+ }
+
+
+
