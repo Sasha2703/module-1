@@ -5,3 +5,11 @@ sasha_cat.example:
     _controller: '\Drupal\sasha_cat\Controller\SashaCatController::build'
   requirements:
     _permission: 'access content'
+
+sasha_cat.settings_form:
+  path: '/admin/config/system/sasha-cat'
+  defaults:
+    _title: 'sasha-cat settings'
+    _form: 'Drupal\sasha_cat\Form\SettingsForm'
+  requirements:
+    _permission: 'administer sasha_cat configuration'
