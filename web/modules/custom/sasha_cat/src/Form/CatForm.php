@@ -2,20 +2,17 @@
 
 namespace Drupal\sasha_cat\Form;
 
-use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 
-class SettingsForm extends ConfigFormBase {
+class CatForm extends FormBase {
 
 
   public function getFormId() {
     return 'sasha_cat_settings';
   }
 
-  protected function getEditableConfigNames() {
-    return ['sasha_cat.settings'];
-  }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['adding_cat'] = [
