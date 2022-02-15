@@ -10,6 +10,6 @@ sasha_cat.settings_form:
   path: '/admin/config/system/sasha-cat'
   defaults:
     _title: 'sasha-cat settings'
-    _form: 'Drupal\sasha_cat\Form\SettingsForm'
+    _form: 'Drupal\sasha_cat\CatForm'
   requirements:
     _permission: 'administer sasha_cat configuration'
