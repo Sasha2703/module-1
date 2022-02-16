@@ -10,7 +10,7 @@ class CatForm extends FormBase {
 
 
   public function getFormId() {
-    return 'sasha_cat_settings';
+    return 'sasha_cat';
   }
 
 

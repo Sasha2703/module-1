@@ -3,6 +3,6 @@ sasha_cat:
   js:
     js/sasha-cat.js: {}
   css:
-    component:
-      css/sasha-cat.css: {}
+    theme:
+      css/style.css: {}
 
