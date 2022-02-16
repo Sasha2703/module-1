@@ -1,0 +1,16 @@
+.navbar-header{
+    margin: 0 10px;
+   width: 1000px;
+ }
+.page-header{
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  font-size: 30px;
+  font-weight: 300;
+}
+.button{
+  box-shadow: 0 3px 5px  black;
+  background-color: #7a4ca9;
+}
+
+
