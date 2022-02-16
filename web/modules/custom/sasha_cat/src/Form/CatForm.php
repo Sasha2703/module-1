@@ -28,13 +28,15 @@ class CatForm extends FormBase {
     return $form;
   }
 
-//  public function validateForm(array &$form, FormStateInterface $form_state) {
-//    if ($form_state->getValue('example') != 'example') {
-//      $form_state->setErrorByName('example', $this->t('The value is not correct.'));
-//    }
-//    parent::validateForm($form, $form_state);
-//  }
-
+  public function validateForm(array &$form, FormStateInterface $form_state)
+  {
+    if ((mb_strlen($form_state->getValue('adding_cat')) < 2)) {
+      $form_state->setErrorByName('adding_cat', $this->t('Your cat`s name should be more than 2 symbols.'));
+    }
+    if ((mb_strlen($form_state->getValue('adding_cat')) > 32)) {
+      $form_state->setErrorByName('adding_cat', $this->t('Your cat`s name should be less than 32 symbols.'));
+    }
+  }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
     \Drupal::messenger()->addStatus(t('Congratulations! You added your cat!;)'));
