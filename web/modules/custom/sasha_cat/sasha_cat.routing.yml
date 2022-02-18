@@ -1,0 +1,15 @@
+sasha_cat.example:
+  path: '/sasha-cat/cat'
+  defaults:
+    _title: 'Hello! You can add here a photo of your cat.'
+    _controller: '\Drupal\sasha_cat\Controller\SashaCatController::content'
+  requirements:
+    _permission: 'access content'
+
+sasha_cat.settings_form:
+  path: '/admin/config/system/sasha-cat'
+  defaults:
+    _title: 'sasha-cat'
+    _form: 'Drupal\sasha_cat\Form\CatForm'
+  requirements:
+    _permission: 'administer sasha_cat configuration'
