@@ -25,6 +25,19 @@ class CatForm extends FormBase
       '#placeholder' => $this->t('The name must be in range from 2 to 32 symbols'),
       '#required' => TRUE,
     ];
+    $form['email'] = [
+      '#type' => 'email',
+      '#title' => $this->t('Your email:'),
+      '#placeholder' => $this->t('example@email.com'),
+      '#required' => TRUE,
+      '#ajax' => [
+        'callback' => '::AjaxEmail',
+        'event' => 'change',
+        'progress' => [
+          'type' => 'none',
+        ],
+      ],
+    ];
     $form ['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add cat'),
@@ -66,6 +79,16 @@ class CatForm extends FormBase
       $response->addCommand(new MessageCommand('Congratulations! You added your cat!'));
     }
     \Drupal::messenger()->deleteAll();
+    return $response;
+  }
+  public function AjaxEmail(array &$form, FormStateInterface $form_state)
+  {
+    $response = new AjaxResponse();
+    if (preg_match("/^[a-zA-Z_\-]+@[a-zA-Z_\-\.]+\.[a-zA-Z\.]{2,6}+$/", $form_state->getValue('email'))){
+      $response->addCommand(new MessageCommand('Your email is invalid'));
+    } else {
+      $response->addCommand(new MessageCommand('Your email is NOT invalid', ".null", ['type' => 'error'], ));
+    }
     return $response;
   }
 }
