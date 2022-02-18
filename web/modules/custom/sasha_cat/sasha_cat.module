@@ -1,0 +1,14 @@
+<?php
+function sashatheme($existing, $type, $theme, $path)
+{
+  return [
+    'cats' => [
+      'render' => 'form',
+      'variables' => [
+        'form' => NULL,
+        'responses' => NULL,
+        'pager' => NULL,
+      ],
+    ],
+  ];
+}
