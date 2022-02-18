@@ -13,5 +13,21 @@
   background-color: #7a4ca9;
   border-color: #7a4ca9;
 }
+.button:hover {
+  box-shadow: 0 3px 5px  black;
+  background-color: #7a4ca9;
+  border-color: #7a4ca9;
+}
+.button:active {
+  box-shadow: 0 3px 5px  black;
+  background-color: #7a4ca9;
+  border-color: #7a4ca9;
+}
+.button:focus {
+  box-shadow: 0 3px 5px  black;
+  background-color: #7a4ca9;
+  border-color: #7a4ca9;
+}
+
 
 
