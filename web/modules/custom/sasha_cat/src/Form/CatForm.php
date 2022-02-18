@@ -60,7 +60,7 @@ class CatForm extends FormBase
     $response = new AjaxResponse();
     if ($form_state->hasAnyErrors()) {
       foreach ($form_state->getErrors() as $errors_array) {
-        $response->addCommand(new MessageCommand($errors_array, NULL, ['type' => 'warning']));
+        $response->addCommand(new MessageCommand($errors_array, NULL, ['type' => 'error']));
       }
     } else {
       $response->addCommand(new MessageCommand('Congratulations! You added your cat!'));
