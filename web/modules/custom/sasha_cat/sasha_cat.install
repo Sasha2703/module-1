@@ -22,8 +22,8 @@ function sasha_cat_uninstall() {
 /**
  * Implements hook_schema().
  */
-function sasha_cat_schema() {
-  $schema['sasha_cat_example'] = [
+function sasha_cat_schema(): array {
+  $schema['sasha_cat'] = [
     'description' => 'Table description.',
     'fields' => [
       'id' => [
@@ -59,12 +59,29 @@ function sasha_cat_schema() {
         'default' => 0,
         'description' => 'Timestamp when the record was created.',
       ],
-      'data' => [
-        'type' => 'blob',
-        'not null' => TRUE,
-        'size' => 'big',
-        'description' => 'The arbitrary data for the item.',
-      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => true,
+        'default' => '',
+        ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true,
+        'default' => '',
+        ],
+      'image' => [
+        'type' => 'int',
+        'length' => 20,
+        'not null' => true,
+        ],
+      'date' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true,
+        'default' => '',
+        ],
     ],
     'primary key' => ['id'],
     'indexes' => [
@@ -77,20 +94,3 @@ function sasha_cat_schema() {
   return $schema;
 }
 
-/**
- * Implements hook_requirements().
- */
-function sasha_cat_requirements($phase) {
-  $requirements = [];
-
-  if ($phase == 'runtime') {
-    $value = mt_rand(0, 100);
-    $requirements['sasha_cat_status'] = [
-      'title' => t('sasha-cat status'),
-      'value' => t('sasha-cat value: @value', ['@value' => $value]),
-      'severity' => $value > 50 ? REQUIREMENT_INFO : REQUIREMENT_WARNING,
-    ];
-  }
-
-  return $requirements;
-}
