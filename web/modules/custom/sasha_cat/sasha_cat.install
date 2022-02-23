@@ -20,6 +20,7 @@ function sasha_cat_uninstall() {
 }
 
 /**
+ * @return mixed
  * Implements hook_schema().
  */
 function sasha_cat_schema(): array {
