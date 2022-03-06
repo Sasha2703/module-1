@@ -64,3 +64,4 @@ This repo is intended for quick start demos and includes a hardcoded value for `
 If you are basing your project code base on this repo, make sure you regenerate and update the `hash_salt` value.
 A new value can be generated with `drush ev '$hash = Drupal\Component\Utility\Crypt::randomBytesBase64(55); print $hash . "\n";'`
 # module-1
+# module-1
