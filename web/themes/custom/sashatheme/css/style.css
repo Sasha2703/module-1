@@ -12,7 +12,6 @@
   font-weight: 300;
 }
 .button{
-  width: 150px;
   box-shadow: 0 3px 5px  black;
   background-color: #7a4ca9;
   border-color: #7a4ca9;
@@ -70,6 +69,59 @@ h3 {
 h5 {
   font-family: 'Poppins', sans-serif;
 }
+
+.catButton {
+  display: flex;
+  border-radius: 5px;
+  background-color: #a271d5;
+  padding: 4px 40px;
+  margin-bottom: 20px;
+  box-shadow: 1px 4px 6px;
+}
+.catButton:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.cat_admin_buttons {
+  margin: auto 10px auto auto;
+}
+.catEditBtn {
+  margin: auto;
+  text-decoration: none;
+  font-size: 24px;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+}
+.catEditBtn:hover {
+  color: black;
+}
+.catDeleteBtn {
+  margin: auto;
+  text-decoration: none;
+  font-size: 24px;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+}
+.catDeleteBtn:hover {
+  color: black;
+}
+.ui-widget-overlay{
+  display: none;
+}
+.ui-dialog-buttonpane{
+  display: flex;
+}
+.ui-dialog-buttonset{
+  margin: auto;
+  display: flex;
+}
+.form-control .ui-button .ui-corner-all .ui-widget{
+  margin: 20px 30px;
+  height: 30px;
+}
+
+
+
 
 
 
