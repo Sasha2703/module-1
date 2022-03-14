@@ -1,3 +1,6 @@
+.form-control{
+  width: 400px;
+}
 .navbar-header{
     margin: 0 10px;
    width: 1000px;
@@ -9,6 +12,7 @@
   font-weight: 300;
 }
 .button{
+  width: 150px;
   box-shadow: 0 3px 5px  black;
   background-color: #7a4ca9;
   border-color: #7a4ca9;
@@ -27,6 +31,44 @@
   box-shadow: 0 3px 5px  black;
   background-color: #7a4ca9;
   border-color: #7a4ca9;
+}
+
+.cat-table {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid;
+  margin-top: 40px;
+  padding: 25px;
+  border-radius: 10px;
+  background-color: #d2c6df;
+}
+.cat-tb {
+  display: flex;
+}
+.cat-name {
+  margin: auto;
+}
+.cat-email {
+  margin: auto;
+}
+.cat-photo {
+  margin: auto 50px auto auto;
+}
+.cat-photo img {
+  width: 250px;
+  height: 250px;
+  border-radius: 20%;
+}
+.cat-photo img:hover {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: 0.3s;
+}
+h3 {
+  font-family: 'Rubik Beastly', cursive;
+}
+h5 {
+  font-family: 'Poppins', sans-serif;
 }
 
 
