@@ -2,16 +2,14 @@
 /**
  * Implements hook_theme().
  */
-function sasha_theme($existing, $type, $theme, $path)
-{
+function sasha_cat_theme ($existing, $type, $theme, $path) {
   return [
     'cats' => [
       'render' => 'form',
       'variables' => [
         'form' => NULL,
-        'responses' => NULL,
         'pager' => NULL,
-        'list'=>[],
+        'list' => [],
       ],
     ],
   ];

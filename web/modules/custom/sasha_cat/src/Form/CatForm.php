@@ -2,6 +2,7 @@
 
 namespace Drupal\sasha_cat\Form;
 
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -22,6 +23,11 @@ class CatForm extends FormBase
 
   public function buildForm(array $form, FormStateInterface $form_state)
   {
+    $form['item'] = [
+      '#type' => 'page_title',
+      '#title' => $this->t("You can add here a photo of your cat!"),
+    ];
+
     $form['adding_cat'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Your cat’s name:'),
@@ -67,12 +73,12 @@ class CatForm extends FormBase
     return $form;
   }
 
-  public function validateForm(array &$form, FormStateInterface $form_state)
-  {
-    if(!$this->validateName($form, $form_state)){
-      return false;
-    }
-  }
+//  public function validateForm(array &$form, FormStateInterface $form_state)
+//  {
+//    if(!$this->validateName($form, $form_state)){
+//      return false;
+//    }
+//  }
   public function validateName(array &$form, FormStateInterface $form_state)
   {
     if ((mb_strlen($form_state->getValue('adding_cat')) < 2)) {
@@ -92,10 +98,30 @@ class CatForm extends FormBase
     }
     return true;
   }
+  public function validateImage(array &$form, FormStateInterface $form_state) {
+    $picture = $form_state->getValue('cat_image');
+
+    if (!empty($picture[0])) {
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  /**
+   *
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    if (!$this->validateName($form, $form_state) && $this->validateEmail($form, $form_state) && $this->validateImage($form, $form_state)) {
+      return FALSE;
+    }
+    else {
+      return TRUE;
+    }
+  }
 
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
-    if($this->validateName($form, $form_state)){
+    if($this->validateForm($form, $form_state)){
       $picture = $form_state->getValue('cat_image');
       $file = File::load($picture[0]);
       $file->setPermanent();
@@ -117,10 +143,15 @@ class CatForm extends FormBase
   {
     $response = new AjaxResponse();
     $nameValid = $this->validateName($form, $form_state);
+    $imageValid = $this->validateImage($form, $form_state);
 
     if (!$nameValid) {
       $response->addCommand(new MessageCommand('Your name is NOT valid', ".null", ['type' => 'error'],));
-    } else {
+    }
+    elseif (!$imageValid) {
+      $response->addCommand(new MessageCommand('Please, upload your cat image'));
+    }
+    else {
       $response->addCommand(new MessageCommand('Congratulations! You added your cat!'));
     }
     \Drupal::messenger()->deleteAll();

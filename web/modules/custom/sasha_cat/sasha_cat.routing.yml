@@ -1,7 +1,7 @@
-sasha_cat.example:
+sasha.cats:
   path: '/sasha-cat/cat'
   defaults:
-    _title: 'Hello! You can add here a photo of your cat.'
+    _title: ''
     _controller: '\Drupal\sasha_cat\Controller\SashaCatController::content'
   requirements:
     _permission: 'access content'

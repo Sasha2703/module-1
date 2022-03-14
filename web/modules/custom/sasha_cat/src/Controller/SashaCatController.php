@@ -12,21 +12,21 @@ class SashaCatController extends ControllerBase {
   /**
    * Builds the response.
    */
-//  public function build() {
-//
-//    $build['content'] = [
-//      '#type' => 'item',
-//      '#markup' => $this->t('It works!====='),
-//    ];
-//
-//    return $build;
-//  }
+  public function build() {
+
+    $build['content'] = [
+      '#type' => 'item',
+      '#markup' => $this->t('It works!====='),
+    ];
+
+    return $build;
+  }
   public function content() {
-    $form = \Drupal::formBuilder()->getForm('Drupal\sasha_cat\Form\CatForm');
+    $form['sasha_cat'] = \Drupal::formBuilder()->getForm('Drupal\sasha_cat\Form\CatForm');
     return [
-      '#theme' => 'sasha_cat',
-      $form,
-      '#list'=>$this->catTable(),
+      '#theme' => 'cats',
+      '#form' =>$form,
+      '#list' => $this->catTable( ),
     ];
 
   }
@@ -34,27 +34,28 @@ class SashaCatController extends ControllerBase {
   {
     $query= \Drupal::database();
     $result = $query->select('sasha_cat', 'sasha_cattb')
-      ->fields('sasha_cattb', ['name', 'email', 'image', 'date'])
-      ->orderBy('date', 'DESC')
+      ->fields('sasha_cattb', ['id', 'name', 'email', 'image', 'date'])
+      ->orderBy('id', 'DESC')
       ->execute()->fetchAll();
     $data = [];
-    foreach ($result as $row) {
-      $file = File::load($row->image);
+    foreach ($result as $cat) {
+      $file = File::load($cat->image);
       $uri = $file->getFileUri();
       $photoCats = [
-        '#theme' => 'image',
+        '#theme' => 'image_style',
+        '#style_name' => 'wide',
         '#uri' => $uri,
         '#alt' => 'cat',
         '#title' => 'cat',
         '#width' => 255,
       ];
+
       $data[] = [
-        'name' => $row->name,
-        'email' => $row->email,
-        'image' => [
-          'data' => $photoCats,
-        ],
-        'date' => $row->date,
+        'name' => $cat->name,
+        'email' => $cat->email,
+        'image' => $photoCats,
+        'date' => $cat->date,
+        'id' => $cat->id,
       ];
     };
     return $data;
