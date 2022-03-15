@@ -146,7 +146,7 @@ class CatForm extends FormBase
       $response->addCommand(new MessageCommand('Your name is NOT valid', ".null", ['type' => 'error'],));
     }
     elseif (!$imageValid) {
-      $response->addCommand(new MessageCommand('Please, upload your cat image'));
+      $response->addCommand(new MessageCommand('Please, upload your cat image', ".null", ['type' => 'error'],));
     }
     else {
       $response->addCommand(new MessageCommand('Congratulations! You added your cat!'));
@@ -156,7 +156,7 @@ class CatForm extends FormBase
     return $response;
   }
 
-  public function AjaxEmail(array &$form, FormStateInterface $form_state)
+  public function AjaxEmail(array &$form, FormStateInterface $form_state): AjaxResponse
   {
     $response = new AjaxResponse();
     if (preg_match("/^[a-zA-Z_\-]+@[a-zA-Z_\-\.]+\.[a-zA-Z\.]{2,6}+$/", $form_state->getValue('email'))) {
