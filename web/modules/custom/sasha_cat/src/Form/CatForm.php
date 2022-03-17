@@ -8,18 +8,22 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\MessageCommand;
 use Drupal\file\Entity\File;
 
-class CatForm extends FormBase
-{
+/**
+ *
+ */
+class CatForm extends FormBase{
 
-
-  public function getFormId()
-  {
+  /**
+   *
+   */
+  public function getFormId(){
     return 'sasha_cat';
   }
 
-
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  /**
+   *
+   */
+  public function buildForm(array $form, FormStateInterface $form_state){
     $form['item'] = [
       '#type' => 'page_title',
       '#title' => $this->t("You can add here a photo of your cat!"),
@@ -70,14 +74,10 @@ class CatForm extends FormBase
     return $form;
   }
 
-//  public function validateForm(array &$form, FormStateInterface $form_state)
-//  {
-//    if(!$this->validateName($form, $form_state)){
-//      return false;
-//    }
-//  }
-  public function validateName(array &$form, FormStateInterface $form_state)
-  {
+  /**
+   *
+   */
+  public function validateName(array &$form, FormStateInterface $form_state){
     if ((mb_strlen($form_state->getValue('adding_cat')) < 2)) {
       return false;
     } elseif ((mb_strlen($form_state->getValue('adding_cat')) > 32)) {
@@ -86,15 +86,20 @@ class CatForm extends FormBase
     return true;
   }
 
-
-  public function validateEmail(array &$form, FormStateInterface $form_state)
-  {
+  /**
+   *
+   */
+  public function validateEmail(array &$form, FormStateInterface $form_state){
     if (!preg_match("/^[a-zA-Z_\-]+@[a-zA-Z_\-\.]+\.[a-zA-Z\.]{2,6}+$/", $form_state->getValue('email'))) {
       $form_state->setErrorByName('email', $this->t('Your email is NOT invalid'));
       return false;
     }
     return true;
   }
+
+  /**
+   *
+   */
   public function validateImage(array &$form, FormStateInterface $form_state) {
     $picture = $form_state->getValue('cat_image');
 
@@ -116,8 +121,7 @@ class CatForm extends FormBase
     }
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state){
     if($this->validateForm($form, $form_state)){
       $picture = $form_state->getValue('cat_image');
       $file = File::load($picture[0]);
@@ -136,8 +140,10 @@ class CatForm extends FormBase
 
   }
 
-  public function AjaxSubmit(array &$form, FormStateInterface $form_state)
-  {
+  /**
+   *
+   */
+  public function AjaxSubmit(array &$form, FormStateInterface $form_state){
     $response = new AjaxResponse();
     $nameValid = $this->validateName($form, $form_state);
     $imageValid = $this->validateImage($form, $form_state);
@@ -156,8 +162,10 @@ class CatForm extends FormBase
     return $response;
   }
 
-  public function AjaxEmail(array &$form, FormStateInterface $form_state): AjaxResponse
-  {
+  /**
+   *
+   */
+  public function AjaxEmail(array &$form, FormStateInterface $form_state): AjaxResponse{
     $response = new AjaxResponse();
     if (preg_match("/^[a-zA-Z_\-]+@[a-zA-Z_\-\.]+\.[a-zA-Z\.]{2,6}+$/", $form_state->getValue('email'))) {
       $response->addCommand(new MessageCommand('Your email is valid'));

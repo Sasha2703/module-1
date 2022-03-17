@@ -8,18 +8,21 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 
-class EditCats extends FormBase
-{
+/**
+ *
+ */
+class EditCats extends FormBase{
 
   public $catID;
 
-  public function getFormId()
-  {
+  public function getFormId(){
     return 'edit cat';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state, $catID = NULL)
-  {
+  /**
+   *
+   */
+  public function buildForm(array $form, FormStateInterface $form_state, $catID = NULL){
     $this->id = $catID;
     $query = \Drupal::database();
     $data = $query
@@ -76,8 +79,10 @@ class EditCats extends FormBase
     return $form;
   }
 
-  public function validateName(array &$form, FormStateInterface $form_state)
-  {
+  /**
+   *
+   */
+  public function validateName(array &$form, FormStateInterface $form_state){
     if ((mb_strlen($form_state->getValue('adding_cat')) < 2)) {
       return false;
     } elseif ((mb_strlen($form_state->getValue('adding_cat')) > 32)) {
@@ -86,8 +91,10 @@ class EditCats extends FormBase
     return true;
   }
 
-  public function validateEmail(array &$form, FormStateInterface $form_state)
-  {
+  /**
+   *
+   */
+  public function validateEmail(array &$form, FormStateInterface $form_state){
     if (!preg_match("/^[a-zA-Z_\-]+@[a-zA-Z_\-\.]+\.[a-zA-Z\.]{2,6}+$/", $form_state->getValue('email'))) {
       $form_state->setErrorByName('email', $this->t('Your email is NOT invalid'));
       return false;
@@ -95,6 +102,9 @@ class EditCats extends FormBase
     return true;
   }
 
+  /**
+   *
+   */
   public function validateImage(array &$form, FormStateInterface $form_state){
     $picture = $form_state->getValue('cat_image');
 
@@ -104,16 +114,20 @@ class EditCats extends FormBase
     return false;
   }
 
-  public function validateForm(array &$form, FormStateInterface $form_state)
-  {
+  /**
+   *
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state){
     if (!$this->validateName($form, $form_state) && $this->validateEmail($form, $form_state) && $this->validateImage($form, $form_state)) {
       return false;
     }
     else return true;
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  /**
+   *
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state){
     if ($this->validateForm($form, $form_state)) {
       $picture = $form_state->getValue('cat_image');
       $file = File::load($picture[0]);
@@ -130,8 +144,10 @@ class EditCats extends FormBase
     }
   }
 
-  public function AjaxSubmit(array &$form, FormStateInterface $form_state): AjaxResponse
-  {
+  /**
+   *
+   */
+  public function AjaxSubmit(array &$form, FormStateInterface $form_state): AjaxResponse{
     $response = new AjaxResponse();
     $nameValid = $this->validateName($form, $form_state);
     $imageValid = $this->validateImage($form, $form_state);
@@ -149,6 +165,9 @@ class EditCats extends FormBase
     return $response;
   }
 
+  /**
+   *
+   */
   public function AjaxEmail(array &$form, FormStateInterface $form_state): AjaxResponse
   {
     $response = new AjaxResponse();

@@ -31,3 +31,21 @@ sasha_cat.settings_form:
     _form: 'Drupal\sasha_cat\Form\CatForm'
   requirements:
     _permission: 'administer sasha_cat configuration'
+
+admin_menu:
+  path: '/admin/structure/cats'
+  defaults:
+    _title: 'Cats list'
+    _controller: '\Drupal\sasha_cat\Controller\CatAdminController::content'
+    _form: 'Drupal\sasha_cat\Form\AdminForm'
+  requirements:
+    _permission: 'administer sasha_cat configuration'
+
+admin_delete:
+  path: '/sasha-cat/admin/delete-cat/{idCat}/deleteCats'
+  defaults:
+    _form: '\Drupal\sasha_cat\Form\AdminDelete'
+    _title: 'Do you want to delete this cat?'
+  requirements:
+    _role: 'administrator'
+    _permission: 'administrator'

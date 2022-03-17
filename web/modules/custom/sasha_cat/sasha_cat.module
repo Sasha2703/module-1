@@ -12,5 +12,13 @@ function sasha_cat_theme ($existing, $type, $theme, $path) {
         'list' => [],
       ],
     ],
+    'admin-cats' => [
+      'render' => 'form',
+      'variables' => [
+        'form' => NULL,
+        'pager' => NULL,
+        'list' => [],
+      ],
+    ],
   ];
 }
