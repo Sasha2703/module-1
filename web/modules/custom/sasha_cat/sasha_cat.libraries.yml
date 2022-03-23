@@ -1,7 +1,5 @@
 # Custom module library for general purposes.
 sasha_cat_library:
-  js:
-    js/sasha-cat.js: {}
   css:
     theme:
       css/style.css: {}

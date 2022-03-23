@@ -6,12 +6,12 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\file\Entity\File;
 
 /**
- *
+ * Implements content().
  */
 class CatAdminController extends ControllerBase {
 
   /**
-   *
+   * Implements content().
    */
   public function content() {
     $form = \Drupal::formBuilder()->getForm('Drupal\sasha_cat\Form\AdminForm');
@@ -25,7 +25,7 @@ class CatAdminController extends ControllerBase {
   }
 
   /**
-   *
+   * Return  markup array.
    */
   public function catTable(): array {
     $query = \Drupal::database();
@@ -34,8 +34,8 @@ class CatAdminController extends ControllerBase {
       ->orderBy('date', 'DESC')
       ->execute()->fetchAll();
     $data = [];
-    foreach ($result as $row) {
-      $file = File::load($row->image);
+    foreach ($result as $cat) {
+      $file = File::load($cat->image);
       $uri = $file->getFileUri();
       $photoCats = [
         '#theme' => 'image_style',
@@ -46,11 +46,11 @@ class CatAdminController extends ControllerBase {
         '#width' => 255,
       ];
       $data[] = [
-        'name' => $row->name,
-        'email' => $row->email,
+        'name' => $cat->name,
+        'email' => $cat->email,
         'image' => $photoCats,
-        'date' => $row->date,
-        'id' => $row->id,
+        'date' => $cat->date,
+        'id' => $cat->id,
       ];
     };
     return $data;
